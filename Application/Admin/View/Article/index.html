@@ -1,0 +1,107 @@
+<link rel="stylesheet" href="__PUBLIC__/page.css">
+<div class="main-content">
+    <div class="breadcrumbs" id="breadcrumbs">
+        <script type="text/javascript">
+            try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+        </script>
+
+        <ul class="breadcrumb">
+            <li>
+                <i class="icon icon-user"></i>
+                <b>文章管理</b>
+            </li>
+        </ul>
+
+        <div class="nav-search" id="nav-search">
+            <form class="form-search" method="get">
+                <span class="input-icon">
+                    <input type="text" placeholder="搜索..." name="title" class="nav-search-input" id="nav-search-input" autocomplete="off" />
+                    <i class="icon-search nav-search-icon"></i>
+                    <button type="submit">
+                        <i class="icon-search nav-search-icon"></i>
+                    </button>
+
+                </span>
+            </form>
+        </div><!-- #nav-search -->
+    </div>
+        <div class="page-content">
+        <div class="page-header">
+            <h1>
+                文章
+                <small>
+                    <i class="icon-double-angle-right"></i>
+                   列表
+                </small>
+            </h1>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="table-responsive">
+                            <table id="sample-table-1" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>文章标题</th>
+                                        <th>文章简介</th>
+                                        <!-- <th>缩略图</th> -->
+                                        <th>所属栏目</th>
+                                        <th>发表人</th>
+                                        <th>
+                                            <i class="icon-time bigger-110 hidden-480"></i>时间
+                                        </th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                <volist name="list" id="vo">
+                                    <tr>
+                                        <td>{$vo.id}</td>
+                                        <td>
+                                            <a href="__APP__/Home/Article/index/id/{$vo.id}">{$vo.title}</a>
+                                        </td>
+                                        <td width="50%">
+                                            <if condition="$vo['intro'] neq ''">
+                                            {$vo.intro}
+                                            <else />
+                                            <span class="label label-warning arrowed">暂无简介</span>
+                                            </if>
+                                        </td>
+                                        <!-- <td>
+                                            <if condition="$vo['pic'] neq ''">
+                                            <img src='__ROOT__{$vo.pic}' height="40"/>
+                                            <else />
+                                            <span class="label label-warning arrowed">暂无缩略图</span>
+                                            </if>
+                                        </td> -->
+                                        <td>{$vo.name}</td>
+                                        <td>{$vo.username}</td>
+                                        <td>{$vo.ctime|substr=0,11}</td>
+                                        <td align="center">
+                                            <a href="__CONTROLLER__/del/id/{$vo.id}" onclick="return confirm('确定要删除文章“{$vo.title}”吗？')">
+                                                <i style="color:red" class="icon-trash icon-2x"></i>
+
+                                            </a>
+                                            <a href="__CONTROLLER__/edit/id/{$vo.id}">
+                                                <i class="icon-edit icon-2x"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    </volist>
+                                </tbody>
+                            </table>
+                        </div><!-- /.table-responsive -->
+                        <div class="col-xs-12 col-md-12 col-lg-12 b-page">
+                            {$page}
+                        </div>
+                    </div><!-- /span -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

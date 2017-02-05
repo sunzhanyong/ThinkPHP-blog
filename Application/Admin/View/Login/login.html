@@ -1,0 +1,106 @@
+﻿{__NOLAYOUT__}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>后台登录页面</title>
+		<meta name="keywords" content="" />
+		<meta name="description" content="" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link href="__PUBLIC__/Admin/assets/css/bootstrap.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="__PUBLIC__/Admin/assets/css/font-awesome.min.css" />
+
+		<!-- ace styles -->
+		<link rel="stylesheet" href="__PUBLIC__/Admin/assets/css/ace.min.css" />
+		<link rel="stylesheet" href="__PUBLIC__/Admin/assets/css/ace-rtl.min.css" />
+		<style type="text/css" media="screen">
+			*{
+				font-family:'Microsof YaHei';
+			}
+			#bid{
+				border-radius:5%;
+				font-size:14px;
+			}
+		</style>
+
+	</head>
+
+	<body class="login-layout">
+		<div class="main-container">
+			<div class="main-content">
+				<div class="row">
+					<div class="col-sm-10 col-sm-offset-1">
+						<div class="login-container">
+							<div class="center">
+								<h1>
+									<i class="icon-leaf green"></i>
+									<span class="red">Ace</span>
+									<span class="white">Application</span>
+								</h1>
+								<h4 class="blue">&copy; Company Name</h4>
+							</div>
+
+							<div class="space-6"></div>
+
+							<div class="position-relative">
+								<div id="login-box" class="login-box visible widget-box no-border">
+									<div class="widget-body">
+										<div class="widget-main">
+											<h4 class="header blue lighter bigger">
+												<i class="icon-coffee green"></i>
+												请输入管理员账号密码
+											</h4>
+
+											<div class="space-6"></div>
+
+											<form action="" method="post">
+												<fieldset>
+													<label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input type="text" required="required" class="form-control" placeholder="用户名或邮箱" name="username" autofocus="autofocus" />
+															<i class="icon-user"></i>
+														</span>
+													</label>
+
+													<label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input type="password" required="required" class="form-control" placeholder="密码" name="password" />
+															<i class="icon-lock"></i>
+														</span>
+													</label>
+													<label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input type="text" required="required" class="form-control col-sm-5" placeholder="验证码" name="verify" />
+															<i class="icon-barcode"></i>
+														</span>
+													</label>
+													<div class="clearfix">
+														<!-- 验证码开始 -->
+														<img src="__CONTROLLER__/verify" alt="" style="cursor: pointer;" onclick="this.src='__CONTROLLER__/verify/+Math.random()'">
+														<!-- 验证码结束 -->
+
+														<button id="bid" type="submit" class="width-35 pull-right btn btn-sm btn-primary">
+															<i class="icon-key"></i>
+															登陆
+														</button>
+													</div>
+
+													<div class="space-4"></div>
+												</fieldset>
+											</form>
+
+										</div><!-- /widget-main -->
+
+										<div class="toolbar clearfix">
+											<div></div><div></div>
+										</div>
+									</div><!-- /widget-body -->
+								</div><!-- /login-box -->
+							</div><!-- /position-relative -->
+						</div>
+					</div><!-- /.col -->
+				</div><!-- /.row -->
+			</div>
+		</div><!-- /.main-container -->
+</body>
+</html>

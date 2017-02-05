@@ -1,0 +1,79 @@
+<script type="text/javascript" src="__PUBLIC__/Admin/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/ueditor/ueditor.all.js"></script>
+<div class="main-content">
+    <div class="breadcrumbs" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <i class="icon icon-user"></i>
+                <b>文章管理</b>
+            </li>
+            <li >添加文章</li>
+        </ul>
+    </div>
+
+    <div class="page-content">
+
+        <div class="row">
+            <div class="col-xs-12">
+                <!-- PAGE CONTENT BEGINS -->
+
+                <form class="form-horizontal" role="form" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="uid" value="<?php echo $_SESSION['id'] ?>">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1">文章标题：</label>
+
+                        <div class="col-sm-9">
+                            <input type="text" id="form-field-1" name="title" placeholder='文章标题（必填）' class="col-xs-10 col-sm-6" autofocus="autofocus" required="required" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1">文章简介：</label>
+
+                        <div class="col-sm-9">
+                            <textarea name="intro" class="col-xs-10 col-sm-6" rows="5" placeholder="如果不写简介，将会从文章内容开头取出200字"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1">所属栏目：</label>
+
+                        <div class="col-sm-9">
+                            <select class="col-xs-10 col-sm-6" name="cid" required="required" >
+                                    <option value="">&nbsp;</option>
+                                <volist name="data" id='vo'>
+                                    <option value="{$vo.id}">{$vo.name}</option>
+                                </volist>
+                            </select>
+                            <span style="color:#ccc;">请务必选择一个所属栏目</span>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1">文章内容：</label>
+
+                        <div class="col-sm-9">
+                            <textarea name="content" id="myEditor" required="required"></textarea>
+                        </div>
+                    </div>
+                    <div class="clearfix form-actions">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button class="btn btn-info" type="submit">
+                                <i class="icon-ok bigger-110"></i>
+                                提交
+                            </button>
+
+                            &nbsp; &nbsp; &nbsp;
+                            <button class="btn" type="reset">
+                                <i class="icon-undo bigger-110"></i>
+                                重置
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+ <script typescripttype="text/javascript">
+    UEDITOR_CONFIG.UEDITOR_HOME_URL = '__PUBLIC__/Admin/ueditor/'; //一定要用这句话，否则你需要去ueditor.config.js修改路径的配置信息
+    UE.getEditor('myEditor',{initialFrameHeight:200,initialFrameWidth:600 });
+ </script>

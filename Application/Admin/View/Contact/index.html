@@ -1,0 +1,81 @@
+<link rel="stylesheet" href="__PUBLIC__/page.css">
+<div class="main-content">
+    <div class="breadcrumbs" id="breadcrumbs">
+        <script type="text/javascript">
+            try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+        </script>
+
+        <ul class="breadcrumb">
+            <li>
+                <i class="icon icon-user"></i>
+                <b>用户留言</b>
+            </li>
+        </ul>
+
+        <div class="nav-search" id="nav-search">
+            <form class="form-search" method="get">
+                <span class="input-icon">
+                    <input type="text" placeholder="搜索..." name="name" class="nav-search-input" id="nav-search-input" autocomplete="off" />
+                    <i class="icon-search nav-search-icon"></i>
+                    <button type="submit">
+                        <i class="icon-search nav-search-icon"></i>
+                    </button>
+
+                </span>
+            </form>
+        </div><!-- #nav-search -->
+    </div>
+        <div class="page-content">
+        <div class="page-header">
+            <h1>
+                留言
+                <small>
+                    <i class="icon-double-angle-right"></i>
+                   用户留言
+                </small>
+            </h1>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="table-responsive">
+                        <if condition="empty($list)">
+                                <p align="center">暂无留言</p>
+                        <else />
+                            <table id="sample-table-1" class="table  table-hover">
+                                <tbody>
+                                <volist name="list" id="vo">
+                                    <tr>
+                                        <td width="20%">
+                                            <b>留言人：</b>{$vo.name}<br />
+                                            <b>邮　箱：</b>{$vo.email}<br />
+                                            <b>工　作：</b>{$vo.job}<br />
+                                        </td>
+
+                                        <td>
+                                            <p><small>{$vo.content}</small></p>
+                                            <p><i class="icon-time bigger-110 hidden-480"></i><i>{$vo.ctime|substr=0,16}</i></p>
+                                        </td>
+                                        <td width="5%" align="center">
+                                            <a href="__CONTROLLER__/del/id/{$vo.id}" onclick="return confirm('确定删除这条留言吗？')">
+                                                <i style="color:red" class="icon-trash icon-2x"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    </volist>
+                                </tbody>
+                            </if>
+                            </table>
+                        </div><!-- /.table-responsive -->
+                        <div class="col-xs-12 col-md-12 col-lg-12 b-page">
+                            {$page}
+                        </div>
+                    </div><!-- /span -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

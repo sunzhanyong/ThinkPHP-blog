@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>{$config[0].title}</title>
+		<!-- meta -->
+		<meta charset="UTF-8">
+		<meta http-equiv="Cache-Control" content="no-siteapp"/>
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="shortcut icon" href="__PUBLIC__/favicon.ico"/>
+		<meta name="keywords" content="{$config[0].keywords}" />
+		<meta name="description" content="{$config[0].description}" />
+		<meta name="author" content="{$config[0].author}">
+
+	    <!-- css -->
+		<link rel="stylesheet" href="__PUBLIC__/Home/css/bootstrap.min.css">
+		<link rel="stylesheet" href="__PUBLIC__/Home/css/ionicons.min.css">
+		<link rel="stylesheet" href="__PUBLIC__/Home/css/pace.css">
+	    <link rel="stylesheet" href="__PUBLIC__/Home/css/custom.css">
+	    <!-- js -->
+	    <script src="__PUBLIC__/Home/js/jquery-2.1.3.min.js"></script>
+	    <script src="__PUBLIC__/Home/js/bootstrap.min.js"></script>
+	    <script src="__PUBLIC__/Home/js/pace.min.js"></script>
+	    <script src="__PUBLIC__/Home/js/modernizr.custom.js"></script>
+	</head>
+<style type="text/css" media="screen">
+/*returnTop*/
+p#back-to-top { border: 1px solid #fff; height: 35px; width: 35px; border-radius: 3px; text-align: center; background: rgba(0, 0, 0, 0.25); position: fixed; display: none; bottom: 35px; right: 20px; }
+p#back-to-top:hover { cursor: pointer; background: #ff6666; }
+.ion-chevron-up { font-size: 20px; line-height: 35px; color: #fff; }
+span#qrcode { border: 1px solid #fff; height: 35px; width: 35px; border-radius: 3px; text-align: center; background: rgba(0, 0, 0, 0.25); position: fixed; bottom: 10px; right: 20px; }
+span#qrcode:hover { cursor: pointer; background: #ff6666; }
+.ion-chatbox { font-size: 20px; line-height: 35px; color: #fff; }
+#imgcode { display: none; position: fixed; right: 60px; bottom: 40px; }
+</style>
+	<body>
+	<p id="#back-to-top"></p>
+		<div class="container">
+			<header id="site-header">
+				<div class="row">
+					<div class="col-md-4 col-sm-5 col-xs-8">
+						<div class="logo">
+							<h1><a href="/">极简主义</a></h1>
+						</div>
+					</div><!-- col-md-4 -->
+					<div class="col-md-8 col-sm-7 col-xs-4">
+						<nav class="main-nav" role="navigation">
+							<div class="navbar-header">
+  								<button type="button" id="trigger-overlay" class="navbar-toggle">
+    								<span class="ion-navicon"></span>
+  								</button>
+							</div>
+
+							<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+  								<ul class="nav navbar-nav navbar-right">
+    								<li class="cl-effect-11"><a href="/" data-hover="Home">主页</a></li>
+    								<li class="cl-effect-11"><a href="/articles" data-hover="Article">文章</a></li>
+    								<li class="cl-effect-11"><a href="/about" data-hover="About">关于</a></li>
+    								<li class="cl-effect-11"><a href="/contact" data-hover="Contact">留言</a></li>
+  								</ul>
+							</div><!-- /.navbar-collapse -->
+						</nav>
+						<div id="header-search-box">
+							<a id="search-menu" href="#"><span id="search-icon" class="ion-ios-search-strong"></span></a>
+							<div id="search-form" class="search-form">
+								<form role="search" method="get" id="searchform" action="/article">
+									<input type="search" name="title" placeholder="搜索文章..." autofocus="autofocus">
+									<button type="submit"><span class="ion-ios-search-strong"></span></button>
+								</form>
+							</div>
+						</div>
+					</div><!-- col-md-8 -->
+				</div>
+			</header>
+		</div>
+
+		{__CONTENT__}
+		<footer id="site-footer">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<p class="copyright"><b>&copy;</b> {$config[0].copyright}&nbsp;<a href="http://www.miitbeian.gov.cn/" target="_blank">{$config[0].records}</a></p>
+					</div>
+				</div>
+			</div>
+		</footer>
+        <aside>
+            <img id="imgcode" src="__PUBLIC__/qrcode.png" alt="扫二维码">
+            <span id="qrcode"><i class="ion-chatbox"></i></span>
+            <p id="back-to-top"><i class="ion-chevron-up"></i></p>
+        </aside>
+		<!-- Mobile Menu -->
+		<div class="overlay overlay-hugeinc">
+			<button type="button" class="overlay-close"><span class="ion-ios-close-empty"></span></button>
+			<nav>
+				<ul>
+					<li><a href="/">主页</a></li>
+					<li><a href="/articles">文章</a></li>
+					<li><a href="/about">关于</a></li>
+					<li><a href="/contact">留言</a></li>
+				</ul>
+			</nav>
+		</div>
+
+		<script src="__PUBLIC__/Home/js/script.js"></script>
+
+	</body>
+<script>
+$(function(){
+    //当滚动条的位置处于距顶部100像素以下时，跳转链接出现，否则消失
+    $(function () {
+        $(window).scroll(function(){
+            if ($(window).scrollTop()>100){
+                $("#back-to-top").fadeIn(1500);
+            }
+            else
+            {
+                $("#back-to-top").fadeOut(1500);
+            }
+        });
+        //当点击跳转链接后，回到页面顶部位置
+        $("#back-to-top").click(function(){
+            $('body,html').animate({scrollTop:0},1000);
+            return false;
+        });
+    });
+    $(function() {
+        $("#qrcode").click(function() {
+            $("#imgcode").toggle(500);
+        });
+    });
+});
+</script>
+</html>

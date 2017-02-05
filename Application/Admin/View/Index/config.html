@@ -1,0 +1,111 @@
+<style type="text/css" media="screen">
+label { display: inline; }
+.button-holder { float: left; }
+.regular-radio { display: none; }
+.regular-radio + label { -webkit-appearance: none; background-color: #fafafa; border: 1px solid #cacece; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05); padding: 9px; border-radius: 50px; display: inline-block; position: relative; }
+.regular-radio:checked + label:after { content: ' '; width: 12px; height: 12px; border-radius: 50px; position: absolute; top: 3px; background: #adb8c0; box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.3); text-shadow: 0px; left: 3px; font-size: 32px; }
+.big-radio + label { padding: 16px; }
+.big-radio:checked + label:after { width: 24px; height: 24px; left: 4px; top: 4px; }
+
+</style>
+<div class="main-content">
+    <div class="breadcrumbs" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <i class="icon icon-user"></i>
+                <b>网站配置</b>
+            </li>
+            <li >网站配置选项</li>
+        </ul>
+    </div>
+
+    <div class="page-content">
+
+        <div class="row">
+            <div class="col-xs-12">
+
+                <form class="form-horizontal" role="form" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1">网站标题：</label>
+
+                        <div class="col-sm-9">
+                            <input type="text" id="form-field-1" name="title" value="{$con.title}" class="col-xs-10 col-sm-6"  autofocus="autofocus" required="required" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-2">网站作者：</label>
+
+                        <div class="col-sm-9">
+                            <input type="text" id="form-field-2" name="author" value="{$con.author}" class="col-xs-10 col-sm-6" required="required" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-2">备案号：</label>
+
+                        <div class="col-sm-9">
+                            <input type="text"  name="records"  value="京ICP备14009546号-3" class="col-xs-10 col-sm-6" required="required" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1" >网站关键字：</label>
+
+                        <div class="col-sm-9">
+                            <textarea class="col-xs-10 col-sm-6" name="keywords"  rows="4" required="required">{$con.keywords}</textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1">版权信息：</label>
+
+                        <div class="col-sm-9">
+                            <textarea class="col-xs-10 col-sm-6" name="copyright"  rows="4" required="required">{$con.copyright}</textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1">网站描述：</label>
+
+                        <div class="col-sm-9">
+                            <textarea class="col-xs-10 col-sm-6" name="description"  rows="6" required="required">{$con.description}</textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1">关于此站：</label>
+
+                        <div class="col-sm-9">
+                            <textarea class="col-xs-10 col-sm-6" name="about"  rows="6" required="required">{$con.about}</textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-2">网站开关：
+                        </label>
+
+                        <div class="col-sm-9">
+                            <div class="button-holder">
+                                <input type="radio" id="radio-2-1" name="switch" value="1" class="regular-radio big-radio" <if condition="$con['switch'] eq '1' ">checked="checked"</if> />
+                                <label for="radio-2-1"></label> <b style="font-size: 16px;color: #6fb3e0;font-weight: 700;">开启网站</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <input type="radio" id="radio-2-2" name="switch" value="0" class="regular-radio big-radio" <if condition="$con['switch'] neq '1' ">checked="checked"</if> />
+                                <label for="radio-2-2"></label> <b style="font-size: 16px;color: #f31019;font-weight: 700;">关闭网站</b>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="clearfix form-actions">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button class="btn btn-info" type="submit">
+                                <i class="icon-ok bigger-110"></i>
+                                提交
+                            </button>
+
+                            &nbsp; &nbsp; &nbsp;
+                            <button class="btn" type="reset">
+                                <i class="icon-undo bigger-110"></i>
+                                重置
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

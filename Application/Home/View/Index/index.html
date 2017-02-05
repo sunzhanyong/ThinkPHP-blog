@@ -1,0 +1,186 @@
+<style type="text/css" media="screen">
+/**时钟**/
+ .fill {background-color: #fff;height:340px;position: relative;border-radius: 50%;margin:0 auto;}
+ .clock {position: absolute;opacity: 1;width:100%;height:340px;}
+ .fill .clock {left: 0;top: 0;height:300px;}
+ .centre {position: absolute;top: 50%;left: 50%;width: 0;height: 0;}
+ .expand {position: absolute;top: 0;left: 0;transform: translate(-50%, -50%);}
+ .anchor {position: absolute;top: 0;left: 0;width: 0;height: 0;}
+ .element {position: absolute;top: 0;left: 0;}
+ .round {border-radius: 296px;}
+ .circle-1 {background: #2e3c49;width: 12px;height: 12px;}
+ .circle-2 {background: #FA9F22;width: 8px;height: 8px;}
+ .circle-3 {background: black;width: 4px;height: 4px;}
+ .second {transform: rotate(180deg);}
+ .minute {transform: rotate(54deg);}
+ .second-hand {width: 2px;height: 164px;background: #FA9F22;transform: translate(-50%,-100%) translateY(24px);}
+ .hour {transform: rotate(304.5deg);}
+ .thin-hand {width: 4px;height: 50px;background: #293642;transform: translate(-50%,-100%);}
+ .fat-hand {width: 10px;height: 57px;border-radius: 10px;background: #293642;transform: translate(-50%,-100%) translateY(-18px);}
+ .minute-hand {height: 112px;}
+ .hour-text {position: absolute;font: 40px Hei, Helvetica, Arial, sans-serif;color: #293642;transform: translate(-50%,-50%);}
+ .hour-10 {padding-left: 0.4ex;}
+ .hour-11 {padding-left: 0.25ex;}
+ .minute-text {position: absolute;font: 12px Avenir Next, Helvetica, Arial, sans-serif;color: #293642;transform: translate(-50%,-50%);}
+ .minute-line {background: #293642;width: 1px;height: 9px;transform: translate(-50%,-100%) translateY(-131px);
+</style>
+<div class="content-body">
+    <div class="container">
+        <div class="row">
+            <main class="col-md-8">
+            <!-- html5时钟开始 -->
+                <div class="fill">
+                  <div class="reference"></div>
+                  <div class="clock" id="utility-clock">
+                    <div class="centre">
+                      <div class="dynamic"></div>
+                      <div class="expand round circle-1"></div>
+                      <div class="anchor hour">
+                        <div class="element thin-hand"></div>
+                        <div class="element fat-hand"></div>
+                      </div>
+                      <div class="anchor minute">
+                        <div class="element thin-hand"></div>
+                        <div class="element fat-hand minute-hand"></div>
+                      </div>
+                      <div class="anchor second">
+                        <div class="element second-hand"></div>
+                      </div>
+                      <div class="expand round circle-2"></div>
+                      <div class="expand round circle-3"></div>
+                    </div>
+                  </div>
+                </div>
+                <!-- html5时钟结束 -->
+            <volist name="artres" id="avo">
+                <article class="post post-1">
+                    <header class="entry-header">
+                        <h1 class="entry-title">
+                            <a href="/article/{$avo.id}">{$avo.title}</a>
+                        </h1>
+                        <div class="entry-meta">
+                            <span class="post-category"><a href="javascript:void(0)">{$avo.name}</a></span>
+
+                            <span class="post-date"><a href="javascript:void(0)"><time class="entry-date">{$avo.ctime}</time></a></span>
+
+                            <span class="post-author"><a href="javascript:void(0)">{$avo.username}</a></span>
+                        </div>
+                    </header>
+                    <div class="entry-content clearfix">
+                        <div style="font-size: 14px;">
+                            <if condition="$avo['intro'] neq ''">
+                                    {$avo.intro}……
+                            <else />
+                                <?php
+                                    $contents = htmlspecialchars_decode($avo['content']);
+                                    $content = strip_tags($contents);
+                                    echo mb_substr($content,0,100,'UTF-8');?> ……
+                            </if>
+                        </div>
+                        <div class="read-more cl-effect-14">
+                            <a href="/article/{$avo.id}" class="more-link">阅读全文 <span class="meta-nav">→</span></a>
+                        </div>
+                    </div>
+                </article>
+                </volist>
+            </main>
+            <aside class="col-md-4">
+                <div class="widget widget-recent-posts">
+                    <h3 class="widget-title">最近发表</h3>
+                    <volist name="artres" id="avo">
+                    <ul>
+                        <li>
+                            <a href="/article/{$avo.id}">{$avo.title}</a>&nbsp;&nbsp;&nbsp;<i class="ion-android-time"></i> <i><small>{$avo.ctime|substr=0,10}</small></i>
+                        </li>
+                    </ul>
+                    </volist>
+                </div>
+
+                <div class="widget widget-archives">
+                    <h3 class="widget-title">栏目</h3>
+                    <volist name="cate" id="vo">
+                    <!-- <ul>
+                        <li>
+                            <a href="__MODULE__/Cate/index/id/{$vo.id}">{$vo.name}</a>
+                        </li>
+                    </ul> -->
+                    <span><a href="/cate/{$vo.id}">{$vo.name}</a></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </volist>
+                </div>
+                <div class="widget widget-category">
+                    <h3 class="widget-title">友情链接</h3>
+                    <if condition="empty($link)">
+                        <ul>
+                            <li>暂无友情链接</li>
+                        </ul>
+                    <else />
+                        <volist name="link" id="vo">
+                            <span><a href="{$vo.url}" title="{$vo.url}" target="_blank">{$vo.name}</a></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </volist>
+                    </if>
+                </div>
+            </aside>
+        </div>
+    </div>
+</div>
+<script>
+    //html5时钟
+    var clock = document.querySelector('#utility-clock');
+    utilityClock(clock);
+
+    function utilityClock(container) {
+        var dynamic = container.querySelector('.dynamic')
+        var hourElement = container.querySelector('.hour')
+        var minuteElement = container.querySelector('.minute')
+        var secondElement = container.querySelector('.second')
+        var minute = function(n) {
+            return n % 5 == 0 ? minuteText(n) : minuteLine(n);
+        }
+        var minuteText = function(n) {
+            var element = document.createElement('div');
+            element.className = 'minute-text';
+            element.innerHTML = (n < 10 ? '0' : '') + n;
+            position(element, n / 60, 135);
+            dynamic.appendChild(element);
+        }
+        var minuteLine = function(n) {
+            var anchor = document.createElement('div');
+            anchor.className = 'anchor';
+            var element = document.createElement('div');
+            element.className = 'element minute-line';
+            rotate(anchor, n);
+            anchor.appendChild(element);
+            dynamic.appendChild(anchor);
+        }
+        var hour = function(n) {
+            var element = document.createElement('div');
+            element.className = 'hour-text hour-' + n;
+            element.innerHTML = n;
+            position(element, n / 12, 105);
+            dynamic.appendChild(element);
+        }
+        var position = function(element, phase, r) {
+            var theta = phase * 2 * Math.PI;
+            element.style.top = (-r * Math.cos(theta)).toFixed(1) + 'px';
+            element.style.left = (r * Math.sin(theta)).toFixed(1) + 'px';
+        }
+        var rotate = function(element, second) {
+            element.style.transform = element.style.webkitTransform = 'rotate(' + (second * 6) + 'deg)';
+        }
+        //以服务器时间为准进行计算
+        var animate = function() {
+            var now  = new Date();
+            var time = now.getHours() * 3600 +
+                       now.getMinutes() * 60 +
+                       now.getSeconds() * 1 +
+                       now.getMilliseconds() / 1000;
+            rotate(secondElement, time);
+            rotate(minuteElement, time / 60);
+            rotate(hourElement, time / 60 / 12);
+            requestAnimationFrame(animate);
+        };
+        for (var i = 1; i <= 60; i ++) minute(i);
+        for (var i = 1; i <= 12; i ++) hour(i);
+        animate();
+    }
+</script>

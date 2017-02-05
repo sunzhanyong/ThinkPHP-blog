@@ -1,0 +1,41 @@
+<link rel="stylesheet" href="__PUBLIC__/homepage.css">
+		<div class="content-body">
+			<div class="container">
+				<div class="row">
+					<main class="col-md-12">
+					<volist name="list" id='vo'>
+						<article class="post post-1">
+							<header class="entry-header">
+								<h1 class="entry-title">
+									<a href="__MODULE__/Article/index/id/{$vo.id}">{$vo.title}</a>
+								</h1>
+								<div class="entry-meta">
+									<span class="post-category"><a href="javascript:void(0)">{$vo.name}</a></span>
+
+									<span class="post-date"><a href="javascript:void(0)"><time class="entry-date">{$vo.ctime}</time></a></span>
+
+									<span class="post-author"><a href="javascript:void(0)">{$vo.username}</a></span>
+								</div>
+							</header>
+		                    <div class="entry-content clearfix">
+			                    <if condition="$vo['intro'] neq ''">
+			                            {$vo.intro}……
+			                    <else />
+			                        <?php
+			                            $contents = htmlspecialchars_decode($vo['content']);
+			                            $content = strip_tags($contents);
+			                            echo mb_substr($content,0,100,'UTF-8');?> ……
+			                    </if>
+		                        <div class="read-more cl-effect-14">
+		                            <a href="__MODULE__/Article/index/id/{$vo.id}" class="more-link">阅读全文 <span class="meta-nav">→</span></a>
+		                        </div>
+		                    </div>
+						</article>
+						</volist>
+					</main>
+					<div class="col-xs-12 col-md-12 col-lg-12 b-page">
+                            {$page}
+                    </div>
+				</div>
+			</div>
+		</div>

@@ -1,0 +1,650 @@
+﻿<!DOCTYPE html>
+
+<html>
+
+	<head>
+
+		<meta charset="utf-8" />
+
+		<title>Blog后台</title>
+
+		<meta name="keywords" content="" />
+
+		<meta name="description" content="" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<!-- basic styles -->
+
+		<link href="__PUBLIC__/Admin/assets/css/bootstrap.min.css" rel="stylesheet" />
+
+		<link rel="stylesheet" href="__PUBLIC__/Admin/assets/css/font-awesome.min.css" />
+
+		<link rel="stylesheet" href="__PUBLIC__/Admin/assets/css/ace.min.css" />
+
+		<link rel="stylesheet" href="__PUBLIC__/Admin/assets/css/ace-rtl.min.css" />
+
+		<link rel="stylesheet" href="__PUBLIC__/Admin/assets/css/ace-skins.min.css" />
+
+		<script src="__PUBLIC__/Admin/assets/js/ace-extra.min.js"></script>
+
+		<style type="text/css" media="screen">
+
+			*{font-family:'Microsoft YaHei';}
+
+		</style>
+
+	</head>
+
+
+
+	<body>
+
+		<div class="navbar navbar-default" id="navbar">
+
+			<script type="text/javascript">
+
+				try{ace.settings.check('navbar' , 'fixed')}catch(e){}
+
+			</script>
+
+
+
+			<div class="navbar-container" id="navbar-container">
+
+				<div class="navbar-header pull-left">
+
+					<a href="#" class="navbar-brand">
+
+						<small>
+
+							<i class="icon-leaf"></i>
+
+							ACE后台管理系统
+
+						</small>
+
+					</a><!-- /.brand -->
+
+				</div><!-- /.navbar-header -->
+
+
+
+				<div class="navbar-header pull-right" role="navigation">
+
+					<ul class="nav ace-nav">
+
+						<li class="green">
+
+							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+
+								<i class="icon-envelope icon-animated-vertical"></i>
+
+								<span class="badge badge-danger">{$num}</span>
+
+							</a>
+
+
+
+							<ul class="pull-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
+
+								<li class="dropdown-header">
+
+									<i class="icon-envelope-alt"></i>
+
+									{$num}条消息
+
+								</li>
+
+
+
+								<li>
+
+								<volist name="contact" id="vo">
+
+ 									<a href="__MODULE__/Contact/index">
+
+										<span class="msg-body">
+
+											<span class="msg-title">
+
+												<span class="blue">{$vo.name}:</span>
+
+												<small>{$vo.content|mb_substr=0,20,'UTF-8'} ……</small>
+
+											</span>
+
+
+
+											<span class="msg-time">
+
+												<i class="icon-time"></i>
+
+												<span><small><i>{$vo.ctime|substr=0,16}</i></small></span>
+
+											</span>
+
+										</span>
+
+									</a>
+
+								</volist>
+
+								</li>
+
+
+
+								<li>
+
+									<a href="__MODULE__/Contact/index">
+
+										查看所有消息
+
+										<i class="icon-arrow-right"></i>
+
+									</a>
+
+								</li>
+
+							</ul>
+
+						</li>
+
+
+
+						<li class="light-blue">
+
+							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
+
+							<if condition="$_SESSION['pic'] neq ''">
+
+								<img class="nav-user-photo" src="__ROOT__{$Think.session.pic}" />
+
+							<else />
+
+								<img class="nav-user-photo" src="__PUBLIC__/admin.png" />
+
+							</if>
+
+								<span class="user-info">
+
+									<small>欢迎光临</small>
+
+									<strong style="color:#f36" title="{$Think.session.email}">{$Think.session.username}</strong>
+
+								</span>
+
+
+
+								<i class="icon-caret-down"></i>
+
+							</a>
+
+
+
+							<ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+
+								<li>
+
+									<a href="__MODULE__/User/savepwd/{$Think.session.id}">
+
+										<i class="icon-user"></i>
+
+										修改密码
+
+									</a>
+
+								</li>
+
+
+
+								<li class="divider"></li>
+
+
+
+								<li>
+
+									<a href="__MODULE__/Index/logout">
+
+										<i class="icon-off"></i>
+
+										退出
+
+									</a>
+
+								</li>
+
+							</ul>
+
+						</li>
+
+					</ul><!-- /.ace-nav -->
+
+				</div><!-- /.navbar-header -->
+
+			</div><!-- /.container -->
+
+		</div>
+
+
+
+		<div class="main-container" id="main-container">
+
+			<script type="text/javascript">
+
+				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+
+			</script>
+
+
+
+			<div class="main-container-inner">
+
+				<a class="menu-toggler" id="menu-toggler" href="#">
+
+					<span class="menu-text"></span>
+
+				</a>
+
+
+
+				<div class="sidebar" id="sidebar">
+
+					<script type="text/javascript">
+
+						try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
+
+					</script>
+
+
+
+					<ul class="nav nav-list">
+
+						<li class="active">
+
+							<a href="/" target="_blank">
+
+								<i class="icon-home"></i>
+
+								<span class="menu-text">前台首页 </span>
+
+							</a>
+
+						</li>
+
+
+
+						<li>
+
+							<a href="__MODULE__">
+
+								<i class="icon-dashboard"></i>
+
+								<span class="menu-text"> 后台首页 </span>
+
+							</a>
+
+						</li>
+
+
+
+						<li>
+
+							<a href="#" class="dropdown-toggle">
+
+								<i class="icon-user"></i>
+
+								<span class="menu-text">管理员管理</span>
+
+
+
+								<b class="arrow icon-angle-down"></b>
+
+							</a>
+
+
+
+							<ul class="submenu">
+
+								<li>
+
+									<a href="__MODULE__/User/index">
+
+										<i class="icon-double-angle-right"></i>
+
+										管理员列表
+
+									</a>
+
+								</li>
+
+								<li>
+
+									<a href="__MODULE__/User/add">
+
+										<i class="icon-double-angle-right"></i>
+
+										添加管理员
+
+									</a>
+
+								</li>
+
+							</ul>
+
+						</li>
+
+						<li>
+
+							<a href="#" class="dropdown-toggle">
+
+								<i class="icon-film"></i>
+
+								<span class="menu-text">栏目管理</span>
+
+
+
+								<b class="arrow icon-angle-down"></b>
+
+							</a>
+
+
+
+							<ul class="submenu">
+
+								<li>
+
+									<a href="__MODULE__/Cate/index">
+
+										<i class="icon-double-angle-right"></i>
+
+										栏目列表
+
+									</a>
+
+								</li>
+
+								<li>
+
+									<a href="__MODULE__/Cate/add">
+
+										<i class="icon-double-angle-right"></i>
+
+										添加栏目
+
+									</a>
+
+								</li>
+
+							</ul>
+
+						</li>
+
+						<li>
+
+							<a href="#" class="dropdown-toggle">
+
+								<i class="icon-list-alt"></i>
+
+								<span class="menu-text">文章管理</span>
+
+
+
+								<b class="arrow icon-angle-down"></b>
+
+							</a>
+
+
+
+							<ul class="submenu">
+
+								<li>
+
+									<a href="__MODULE__/Article/index">
+
+										<i class="icon-double-angle-right"></i>
+
+										文章列表
+
+									</a>
+
+								</li>
+
+								<li>
+
+									<a href="__MODULE__/Article/add">
+
+										<i class="icon-double-angle-right"></i>
+
+										添加文章
+
+									</a>
+
+								</li>
+
+							</ul>
+
+						</li>
+
+
+
+						<li>
+
+							<a href="#" class="dropdown-toggle">
+
+								<i class="icon-fighter-jet"></i>
+
+								<span class="menu-text">友情链接</span>
+
+
+
+								<b class="arrow icon-angle-down"></b>
+
+							</a>
+
+
+
+							<ul class="submenu">
+
+								<li>
+
+									<a href="__MODULE__/Link/index">
+
+										<i class="icon-double-angle-right"></i>
+
+										友情链接列表
+
+									</a>
+
+								</li>
+
+								<li>
+
+									<a href="__MODULE__/Link/add">
+
+										<i class="icon-double-angle-right"></i>
+
+										添加友情链接
+
+									</a>
+
+								</li>
+
+							</ul>
+
+						</li>
+
+
+
+						<li>
+
+							<a href="__MODULE__/Index/config">
+
+								<i class="icon-cogs"></i>
+
+								<span class="menu-text"> 网站配置 </span>
+
+							</a>
+
+						</li>
+
+					</ul><!-- /.nav-list -->
+
+
+
+					<div class="sidebar-collapse" id="sidebar-collapse">
+
+						<i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
+
+					</div>
+
+
+
+					<script type="text/javascript">
+
+						try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
+
+					</script>
+
+				</div>
+
+
+
+					{__CONTENT__}
+
+
+
+				<div class="ace-settings-container" id="ace-settings-container">
+
+					<div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
+
+						<i class="icon-cog bigger-150"></i>
+
+					</div>
+
+
+
+					<div class="ace-settings-box" id="ace-settings-box">
+
+						<div>
+
+							<div class="pull-left">
+
+								<select id="skin-colorpicker" class="hide">
+
+									<option data-skin="default" value="#438EB9">#438EB9</option>
+
+									<option data-skin="skin-1" value="#222A2D">#222A2D</option>
+
+									<option data-skin="skin-2" value="#C6487E">#C6487E</option>
+
+									<option data-skin="skin-3" value="#D0D0D0">#D0D0D0</option>
+
+								</select>
+
+							</div>
+
+							<span>&nbsp; 选择皮肤</span>
+
+						</div>
+						<div>
+
+							<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-rtl" />
+
+							<label class="lbl" for="ace-settings-rtl">切换到左边</label>
+
+						</div>
+
+
+
+						<div>
+
+							<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-add-container" />
+
+							<label class="lbl" for="ace-settings-add-container">
+
+								切换窄屏
+
+								<b></b>
+
+							</label>
+
+						</div>
+
+					</div>
+
+				</div><!-- /#ace-settings-container -->
+
+			</div><!-- /.main-container-inner -->
+
+
+
+			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+
+				<i class="icon-double-angle-up icon-only bigger-110"></i>
+
+			</a>
+
+		</div><!-- /.main-container -->
+
+
+
+		<script type="text/javascript">
+
+			window.jQuery || document.write("<script src='__PUBLIC__/Admin/assets/js/jquery-2.0.3.min.js'>"+"<"+"script>");
+
+		</script>
+
+		<script type="text/javascript">
+
+			if("ontouchend" in document) document.write("<script src='__PUBLIC__/Admin/assets/js/jquery.mobile.custom.min.js'>"+"<"+"script>");
+
+		</script>
+
+		<script src="__PUBLIC__/Admin/assets/js/bootstrap.min.js"></script>
+
+		<script src="__PUBLIC__/Admin/assets/js/typeahead-bs2.min.js"></script>
+
+		<!--[if lte IE 8]>
+
+		  <script src="__PUBLIC__/Admin/assets/js/excanvas.min.js"></script>
+
+		<![endif]-->
+
+
+
+		<script src="__PUBLIC__/Admin/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
+
+		<script src="__PUBLIC__/Admin/assets/js/jquery.ui.touch-punch.min.js"></script>
+
+		<script src="__PUBLIC__/Admin/assets/js/jquery.slimscroll.min.js"></script>
+
+		<script src="__PUBLIC__/Admin/assets/js/jquery.easy-pie-chart.min.js"></script>
+
+		<script src="__PUBLIC__/Admin/assets/js/jquery.sparkline.min.js"></script>
+
+		<script src="__PUBLIC__/Admin/assets/js/flot/jquery.flot.min.js"></script>
+
+		<script src="__PUBLIC__/Admin/assets/js/flot/jquery.flot.pie.min.js"></script>
+
+		<script src="__PUBLIC__/Admin/assets/js/flot/jquery.flot.resize.min.js"></script>
+
+
+
+
+		<!-- ace scripts -->
+
+
+
+		<script src="__PUBLIC__/Admin/assets/js/ace-elements.min.js"></script>
+
+		<script src="__PUBLIC__/Admin/assets/js/ace.min.js"></script>
+
+
+
+</body>
+
+</html>
+
+
+

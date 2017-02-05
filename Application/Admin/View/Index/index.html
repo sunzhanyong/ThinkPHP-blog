@@ -1,0 +1,246 @@
+<style type="text/css" media="screen">
+th,td,h1,font{font-family:"Georgia";}
+/**时钟**/
+ .fill {background-color: #fff;height:340px;position: relative;border-radius: 50%;margin:0 auto;}
+ .clock {position: absolute;opacity: 1;width:100%;height:340px;}
+ .fill .clock {left: 0;top: 0;height:300px;}
+ .centre {position: absolute;top: 50%;left: 50%;width: 0;height: 0;}
+ .expand {position: absolute;top: 0;left: 0;transform: translate(-50%, -50%);}
+ .anchor {position: absolute;top: 0;left: 0;width: 0;height: 0;}
+ .element {position: absolute;top: 0;left: 0;}
+ .round {border-radius: 296px;}
+ .circle-1 {background: #2e3c49;width: 12px;height: 12px;}
+ .circle-2 {background: #FA9F22;width: 8px;height: 8px;}
+ .circle-3 {background: black;width: 4px;height: 4px;}
+ .second {transform: rotate(180deg);}
+ .minute {transform: rotate(54deg);}
+ .second-hand {width: 2px;height: 164px;background: #FA9F22;transform: translate(-50%,-100%) translateY(24px);}
+ .hour {transform: rotate(304.5deg);}
+ .thin-hand {width: 4px;height: 50px;background: #293642;transform: translate(-50%,-100%);}
+ .fat-hand {width: 10px;height: 57px;border-radius: 10px;background: #293642;transform: translate(-50%,-100%) translateY(-18px);}
+ .minute-hand {height: 112px;}
+ .hour-text {position: absolute;font: 40px Hei, Helvetica, Arial, sans-serif;color: #293642;transform: translate(-50%,-50%);}
+ .hour-10 {padding-left: 0.4ex;}
+ .hour-11 {padding-left: 0.25ex;}
+ .minute-text {position: absolute;font: 12px Avenir Next, Helvetica, Arial, sans-serif;color: #293642;transform: translate(-50%,-50%);}
+ .minute-line {background: #293642;width: 1px;height: 9px;transform: translate(-50%,-100%) translateY(-131px);
+</style>
+<div class="main-content">
+    <div class="breadcrumbs" id="breadcrumbs">
+        <script type="text/javascript">
+            try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+        </script>
+
+        <ul class="breadcrumb">
+            <li>
+                <i class="icon icon-home"></i>
+                <b>后台</b>
+            </li>
+            <li>后台首页</li>
+        </ul>
+    </div>
+
+        <div class="col-xs-12 col-sm-12" align="center">
+            <div>
+                <div class="fill">
+                  <div class="reference"></div>
+                  <div class="clock" id="utility-clock">
+                    <div class="centre">
+                      <div class="dynamic"></div>
+                      <div class="expand round circle-1"></div>
+                      <div class="anchor hour">
+                        <div class="element thin-hand"></div>
+                        <div class="element fat-hand"></div>
+                      </div>
+                      <div class="anchor minute">
+                        <div class="element thin-hand"></div>
+                        <div class="element fat-hand minute-hand"></div>
+                      </div>
+                      <div class="anchor second">
+                        <div class="element second-hand"></div>
+                      </div>
+                      <div class="expand round circle-2"></div>
+                      <div class="expand round circle-3"></div>
+                    </div>
+                  </div>
+                </div>
+                <h1 id="localtime" style="margin-top:0;"></h1>
+            </div>
+        </div>
+
+<div class="page-content">
+<div class="page-header">
+<div class="row">
+<div class="col-xs-12" style="
+    margin-top: 20px;">
+<div class="row">
+    <div class="col-xs-12">
+        <div class="table-responsive">
+            <table  class="table table-striped  table-hover">
+                    <thead>
+                        <th>Server Message Block</th>
+                        <th></th>
+                    </thead>
+
+                <tr>
+                    <td>系统版本类型及版本号：</td>
+                    <td><?php echo php_uname()?></td>
+                </tr>
+                <tr>
+                    <td>PHP版本号：</td>
+                    <td><?php echo  PHP_VERSION ?></td>
+                </tr>
+                <tr>
+                    <td>服务器类型：</td>
+                    <td>
+                        <?php
+                            echo $_SERVER['SERVER_SOFTWARE'];
+                        ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>服务器IP：</td>
+                    <td><?php echo  GetHostByName($_SERVER['SERVER_NAME']) ?></td>
+                </tr>
+                <tr>
+                    <td>服务器域名（主机名）：</td>
+                    <td><?php echo  $_SERVER["HTTP_HOST"] ?></td>
+                </tr>
+                <tr>
+                    <td>通信协议的名称和版本：</td>
+                    <td><?php echo  $_SERVER['SERVER_PROTOCOL']  ?></td>
+                </tr>
+                <tr>
+                    <td>服务器语言：</td>
+                    <td><?php echo  $_SERVER['HTTP_ACCEPT_LANGUAGE']  ?></td>
+                </tr>
+                <tr>
+                    <td>当前文件位置：</td>
+                    <td><?php echo   __FILE__ ?></td>
+                </tr>
+                 <tr>
+                    <td>PHP运行方式：</td>
+                    <td><?php echo  php_sapi_name() ?></td>
+                </tr>
+                 <tr>
+                    <td>Zend版本：</td>
+                    <td><?php echo Zend_Version() ?></td>
+                </tr>
+                 <tr>
+                    <td>当前进程用户名：</td>
+                    <td><?php echo Get_Current_User() ?></td>
+                </tr>
+                <tr>
+                    <td>服务器Web端口：</td>
+                    <td><?php echo $_SERVER['SERVER_PORT'] ?></td>
+                </tr>
+            </table>
+        </div><!-- /.table-responsive -->
+    </div><!-- /span -->
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+//html5时钟
+    var clock = document.querySelector('#utility-clock');
+    utilityClock(clock);
+
+    function utilityClock(container) {
+        var dynamic = container.querySelector('.dynamic')
+        var hourElement = container.querySelector('.hour')
+        var minuteElement = container.querySelector('.minute')
+        var secondElement = container.querySelector('.second')
+        var minute = function(n) {
+            return n % 5 == 0 ? minuteText(n) : minuteLine(n);
+        }
+        var minuteText = function(n) {
+            var element = document.createElement('div');
+            element.className = 'minute-text';
+            element.innerHTML = (n < 10 ? '0' : '') + n;
+            position(element, n / 60, 135);
+            dynamic.appendChild(element);
+        }
+        var minuteLine = function(n) {
+            var anchor = document.createElement('div');
+            anchor.className = 'anchor';
+            var element = document.createElement('div');
+            element.className = 'element minute-line';
+            rotate(anchor, n);
+            anchor.appendChild(element);
+            dynamic.appendChild(anchor);
+        }
+        var hour = function(n) {
+            var element = document.createElement('div');
+            element.className = 'hour-text hour-' + n;
+            element.innerHTML = n;
+            position(element, n / 12, 105);
+            dynamic.appendChild(element);
+        }
+        var position = function(element, phase, r) {
+            var theta = phase * 2 * Math.PI;
+            element.style.top = (-r * Math.cos(theta)).toFixed(1) + 'px';
+            element.style.left = (r * Math.sin(theta)).toFixed(1) + 'px';
+        }
+        var rotate = function(element, second) {
+            element.style.transform = element.style.webkitTransform = 'rotate(' + (second * 6) + 'deg)';
+        }
+        //以服务器时间为准进行计算
+        var animate = function() {
+            var now  = new Date();
+            var time = now.getHours() * 3600 +
+                       now.getMinutes() * 60 +
+                       now.getSeconds() * 1 +
+                       now.getMilliseconds() / 1000;
+            rotate(secondElement, time);
+            rotate(minuteElement, time / 60);
+            rotate(hourElement, time / 60 / 12);
+            requestAnimationFrame(animate);
+        };
+        for (var i = 1; i <= 60; i ++) minute(i);
+        for (var i = 1; i <= 12; i ++) hour(i);
+        animate();
+    }
+
+//普通数字时钟
+    function showLocale(objD)
+    {
+    var str,colorhead,colorfoot;
+    var yy = objD.getYear();
+    if(yy<1900) yy = yy+1900;
+    var MM = objD.getMonth()+1;
+    if(MM<10) MM = '0' + MM;
+    var dd = objD.getDate();
+    if(dd<10) dd = '0' + dd;
+    var hh = objD.getHours();
+    if(hh<10) hh = '0' + hh;
+    var mm = objD.getMinutes();
+    if(mm<10) mm = '0' + mm;
+    var ss = objD.getSeconds();
+    if(ss<10) ss = '0' + ss;
+    var ww = objD.getDay();
+    if ( ww==0 ) colorhead="<font color=\"#FF0000\">";
+    if ( ww > 0 && ww < 6 ) colorhead="<font color=\"#373737\">";
+    if ( ww==6 ) colorhead="<font color=\"#008000\">";
+    if (ww==0) ww="星期日";
+    if (ww==1) ww="星期一";
+    if (ww==2) ww="星期二";
+    if (ww==3) ww="星期三";
+    if (ww==4) ww="星期四";
+    if (ww==5) ww="星期五";
+    if (ww==6) ww="星期六";
+    colorfoot="</font>"
+    str = colorhead + yy + "/" + MM + "/" + dd + " " + hh + ":" + mm + ":" + ss + " " + ww + colorfoot;
+    return(str);
+    }
+    function tick()
+    {
+    var today;
+    today = new Date();
+    document.getElementById("localtime").innerHTML = showLocale(today);
+    window.setTimeout("tick()", 1000);
+    }
+    tick();
+</script>

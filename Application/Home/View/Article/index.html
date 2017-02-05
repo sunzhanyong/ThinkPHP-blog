@@ -1,0 +1,25 @@
+        <div class="content-body">
+            <div class="container">
+                <div class="row">
+                    <main class="col-md-12">
+                        <article class="post post-1">
+                            <header class="entry-header">
+                                <h1 class="entry-title">{$data.title}</h1>
+                                <div class="entry-meta">
+                                    <span class="post-category"><a href="javascript:void(0)">{$data.name}</a></span>
+
+                                    <span class="post-date"><a href="javascript:void(0)"><time class="entry-date">{$data.ctime}</time></a></span>
+
+                                    <span class="post-author"><a href="javascript:void(0)">{$data.username}</a></span>
+                                </div>
+                            </header>
+                            <div class="entry-content clearfix">
+                                {$data.content|htmlspecialchars_decode}
+                            </div>
+                            <p align="center"><i class="ion-alert-circled"></i>本页内容据来自互联网，如侵犯了您的权益请联系我，我会马上处理，方式1：<a style="color:rgb(0, 133, 208)" href="__MODULE__/Index/contact">留言页</a>&nbsp;&nbsp;方式2：
+                            szyphp@163.com</p>
+                        </article>
+                    </main>
+                </div>
+            </div>
+        </div>

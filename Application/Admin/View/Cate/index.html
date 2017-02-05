@@ -1,0 +1,74 @@
+<link rel="stylesheet" href="__PUBLIC__/page.css">
+<div class="main-content">
+    <div class="breadcrumbs" id="breadcrumbs">
+        <script type="text/javascript">
+            try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+        </script>
+
+        <ul class="breadcrumb">
+            <li>
+                <i class="icon icon-user"></i>
+                <b>栏目管理</b>
+            </li>
+        </ul>
+    </div>
+        <div class="page-content">
+        <div class="page-header">
+            <h1>
+                栏目
+                <small>
+                    <i class="icon-double-angle-right"></i>
+                   列表
+                </small>
+            </h1>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="table-responsive">
+                            <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>栏目名称</th>
+                                        <th>
+                                            <i class="icon-time bigger-110 hidden-480"></i> 添加时间
+                                        </th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                <volist name="list" id="vo">
+                                    <tr>
+                                        <td>{$vo.id}</td>
+                                        <td>
+                                            <a href="__APP__/Home/Cate/index/id/{$vo.id}">{$vo.name}</a>
+                                        </td>
+                                        <td>{$vo.ctime}</td>
+                                        <td align="center">
+                                            <a href="__CONTROLLER__/del/id/{$vo.id}" onclick="return confirm('确定要删除{$vo.name}吗？')">
+                                                <i style="color:red" class="icon-trash icon-2x"></i>
+
+                                            </a>
+                                            <a href="__CONTROLLER__/edit/id/{$vo.id}">
+                                                <i class="icon-edit icon-2x"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    </volist>
+                                </tbody>
+                            </table>
+                        </div><!-- /.table-responsive -->
+                        <div class="col-xs-12 col-md-12 col-lg-12 b-page">
+                            {$page}
+                        </div>
+                    </div><!-- /span -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
